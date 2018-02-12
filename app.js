@@ -17,15 +17,16 @@ const survey = {
             new SurveyItem ('bubblegum',  'Images/bubblegum.jpg'),
             new SurveyItem ('chair',  'Images/chair.jpg'),
             new SurveyItem ('cthulhu',  'Images/cthulhu.jpg'),
+            new SurveyItem ('dog-duck',  'Images/dog-duck.jpg'),
             new SurveyItem ('dragon',  'Images/dragon.jpg'),
             new SurveyItem ('pen',  'Images/pen.jpg'),
             new SurveyItem ('pet-sweep',  'Images/pet-sweep.jpg'),
             new SurveyItem ('scissors',  'Images/scissors.jpg'),
             new SurveyItem ('shark',  'Images/shark.jpg'),
-            new SurveyItem ('sweep',  'Images/sweep.jpg'),
+            new SurveyItem ('sweep',  'Images/sweep.png'),
             new SurveyItem ('tauntaun',  'Images/tauntaun.jpg'),
             new SurveyItem ('unicorn',  'Images/unicorn.jpg'),
-            new SurveyItem ('usb',  'Images/usb.jpg'),
+            new SurveyItem ('usb',  'Images/usb.gif'),
             new SurveyItem ('water-can',  'Images/water-can.jpg'),
             new SurveyItem ('wine-glass',  'Images/wine-glass.jpg')
         );
@@ -41,9 +42,39 @@ const survey = {
         }
         console.table(selectedItems);
         return selectedItems;
+    },
+
+    getSquares: function () {
+        const section = document.getElementById('survey-board');
+        const allSquares = document.querySelectorAll('div.row-one');
+        const selectedSquares = [];
+        while(selectedSquares.length < 3) {
+            // get random square
+            const randomNumber = Math.floor(Math.random() * allSquares.length);
+            const square = allSquares[randomNumber];
+            if (selectedSquares.includes(square)) continue;
+            selectedSquares.push(square);
+        }
+
+        return selectedSquares;
+    },
+
+    showItems: function () {
+        const items = this.getRandomItem();
+        const squares = this.getSquares();
+        for (let i = 0; i < squares.length; i++) {
+            squares[i].appendChild(items[i].render());
+        }
     }
 };
 
-console.log(survey.surveyItems);
+SurveyItem.prototype.render = function () {
+    const ele = document.createElement('img');
+    ele.src =  this.image;
+    ele.setAttribute('alt', this.name);
+    return ele;
+};
+
 survey.start();
 survey.getRandomItem();
+survey.showItems();
