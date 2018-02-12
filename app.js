@@ -29,8 +29,21 @@ const survey = {
             new SurveyItem ('water-can',  'Images/water-can.jpg'),
             new SurveyItem ('wine-glass',  'Images/wine-glass.jpg')
         );
-    }  
+    },
+
+    getRandomItem: function () {
+        const selectedItems = [];
+        for (let i = 0; i < 3;  i++) {
+            const randomNumber = Math.floor(Math.random() * this.surveyItems.length);
+            const item = this.surveyItems[randomNumber];
+            selectedItems.push(item);
+
+        }
+        console.table(selectedItems);
+        return selectedItems;
+    }
 };
 
 console.log(survey.surveyItems);
 survey.start();
+survey.getRandomItem();
