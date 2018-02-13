@@ -7,18 +7,14 @@ section div {
     display: inline
 }
 
-body main {
-    align-content: center
+#survey-board {
+    text-align: center
 }
 
 h1 {
     text-align: center;
-    background-color: grey;
+    color: rgb(125, 177, 170);
     font-size: 75px 
-}
-
-#survey-board {
-    align-content: center
 }
 
 .row-one img{
@@ -26,9 +22,12 @@ h1 {
     padding: 5px
 }
 
-#chart-section {
-    align-content: center;
-    width: 700px;
+div {
+    display: inline block
+}
+
+.chart-section {
+    width: 550px;
 }
 
 #chart {

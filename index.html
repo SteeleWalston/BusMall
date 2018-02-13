@@ -5,7 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Bus Mall</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="CSS/normalize.css">
+        <link rel="stylesheet" href="CSS/skeleton.css">
+        <link rel="stylesheet" href="CSS/style.css">
     </head>
     <body>
         <main>
@@ -15,18 +17,15 @@
                 <div class="row-one"></div>
                 <div class="row-one"></div>
             </section>
-            <section>
-                <table>
-                    <tbody id="results-table">
-                        
-                    </tbody>
-                </table>
-            </section>
-            <section id="chart-section">
-                <canvas id="chart1" width="500" height="500"></canvas>
-                <canvas id="chart2" width="500" height="500"></canvas>
-            </section>
-        </main>
+            <div>
+                <section class="chart-section">
+                    <canvas id="chart1" width="500" height="500"></canvas>
+                </section>
+                <section class="chart-section">
+                    <canvas id="chart2" width="500" height="500"></canvas>
+                </section>
+            </div>
+            </main>
         <script src="js/app.js"></script>
         <script src="js/Chart.js"></script>
     </body>

@@ -43,7 +43,7 @@ const survey = {
             new SurveyItem ('banana',  'Images/banana.jpg'),
             new SurveyItem ('bathroom',  'Images/bathroom.jpg'),
             new SurveyItem ('boots',  'Images/boots.jpg'),
-            new SurveyItem ('breakfast',  'Images/bag.jpg'),
+            new SurveyItem ('breakfast',  'Images/breakfast.jpg'),
             new SurveyItem ('bubblegum',  'Images/bubblegum.jpg'),
             new SurveyItem ('chair',  'Images/chair.jpg'),
             new SurveyItem ('cthulhu',  'Images/cthulhu.jpg'),
