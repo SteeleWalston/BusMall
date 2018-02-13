@@ -19,10 +19,11 @@ const listen = function () {
     survey.clearBoard();
     survey.showItems();
 
-    if (clickCounter === 3) {
+    if (clickCounter === 27) {
         board.removeEventListener('click', listen);
         // survey.clearBoard();
-        survey.buildChart();
+        survey.buildPickedChart();
+        survey.buildShownChart();
     }
 };
 
@@ -30,6 +31,7 @@ function SurveyItem (name, imageFile) {
     this.name = name;
     this.image = imageFile;
     this.timesPicked = 0;
+    this.timesShown = 0;
 }
 
 const survey = {
@@ -70,6 +72,7 @@ const survey = {
             const item = this.surveyItems[randomNumber];
             if (selectedItems.includes(item)) continue;
             selectedItems.push(item);
+            item.timesShown++;
 
         }
         console.table(selectedItems);
@@ -105,8 +108,8 @@ const survey = {
         }
     },
 
-    buildChart: function () {
-        const chartCanvas = document.getElementById('chart');
+    buildPickedChart: function () {
+        const chartCanvas = document.getElementById('chart1');
         const chartCtx = chartCanvas.getContext('2d');
 
         const names = [];
@@ -123,6 +126,38 @@ const survey = {
                 datasets: [{
                     label: 'number of times picked',
                     data: timesClicked
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    },
+
+    buildShownChart: function () {
+        const chartCanvas = document.getElementById('chart2');
+        const chartCtx = chartCanvas.getContext('2d');
+
+        const names = [];
+        const shown = [];
+        for(let i = 0; i < this.surveyItems.length; i ++) {
+            names.push(this.surveyItems[i].name);
+            shown.push(this.surveyItems[i].timesShown);
+        }
+
+        const chart = new Chart(chartCtx, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [{
+                    label: 'number of times shown',
+                    data: shown
                 }]
             },
             options: {
