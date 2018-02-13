@@ -1,3 +1,30 @@
+const board = document.getElementById('survey-board');
+const listen = function () {
+    console.log('game was clicked', event.target);
+    const file = event.target.src;
+    for (let i = 0; i < survey.surveyItems.length; i++) {
+        const item = survey.surveyItems[i];
+        const endOfFile = file.slice( file.indexOf(item.image), file.length );
+
+        if (endOfFile === item.image) {
+            item.timesPicked++;
+            clickCounter++;
+            console.table(item);
+        }
+    }
+    survey.clearBoard();
+    survey.showItems();
+
+    if (clickCounter === 25) {
+        board.removeEventListener('click', listen);
+        survey.clearBoard();
+    }
+};
+
+
+
+let clickCounter = 0;
+
 function SurveyItem (name, imageFile) {
     this.name = name;
     this.image = imageFile;
@@ -32,23 +59,7 @@ const survey = {
         );
 
         survey.showItems();
-
-        const board = document.getElementById('survey-board');
-        board.addEventListener('click', function() {
-            console.log('game was clicked', event.target);
-            const file = event.target.src;
-            for (let i = 0; i < survey.surveyItems.length; i++) {
-                const item = survey.surveyItems[i];
-                const endOfFile = file.slice( file.indexOf(item.image), file.length );
-
-                if (endOfFile === item.image) {
-                    item.timesPicked++;
-                    console.table(item);
-                }
-            }
-            survey.clearBoard();
-            survey.showItems();
-        });
+        board.addEventListener('click', listen);
     },
 
     getRandomItem: function () {
