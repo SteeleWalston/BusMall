@@ -8,10 +8,16 @@ section div {
 }
 
 #survey-board {
-    text-align: center
+    width: 900px;
+    margin: auto;
+    background-color: rgb(125, 177, 170);
+    text-align: center;
+    border-color: palevioletred solid 5px
 }
 
 h1 {
+    margin-top: 50px;
+    font-family: 'Orbitron', sans-serif;
     text-align: center;
     color: rgb(125, 177, 170);
     font-size: 75px 
