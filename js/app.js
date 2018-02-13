@@ -1,3 +1,7 @@
+// 'use strict';
+
+let clickCounter = 0;
+
 const board = document.getElementById('survey-board');
 const listen = function () {
     console.log('game was clicked', event.target);
@@ -15,19 +19,19 @@ const listen = function () {
     survey.clearBoard();
     survey.showItems();
 
-    if (clickCounter === 25) {
+    if (clickCounter === 27) {
         board.removeEventListener('click', listen);
-        survey.clearBoard();
-        survey.buildTable();
+        // survey.clearBoard();
+        survey.buildPickedChart();
+        survey.buildShownChart();
     }
 };
-
-let clickCounter = 0;
 
 function SurveyItem (name, imageFile) {
     this.name = name;
     this.image = imageFile;
     this.timesPicked = 0;
+    this.timesShown = 0;
 }
 
 const survey = {
@@ -39,7 +43,7 @@ const survey = {
             new SurveyItem ('banana',  'Images/banana.jpg'),
             new SurveyItem ('bathroom',  'Images/bathroom.jpg'),
             new SurveyItem ('boots',  'Images/boots.jpg'),
-            new SurveyItem ('breakfast',  'Images/bag.jpg'),
+            new SurveyItem ('breakfast',  'Images/breakfast.jpg'),
             new SurveyItem ('bubblegum',  'Images/bubblegum.jpg'),
             new SurveyItem ('chair',  'Images/chair.jpg'),
             new SurveyItem ('cthulhu',  'Images/cthulhu.jpg'),
@@ -68,6 +72,7 @@ const survey = {
             const item = this.surveyItems[randomNumber];
             if (selectedItems.includes(item)) continue;
             selectedItems.push(item);
+            item.timesShown++;
 
         }
         console.table(selectedItems);
@@ -79,7 +84,6 @@ const survey = {
         const allSquares = document.querySelectorAll('div.row-one');
         const selectedSquares = [];
         while(selectedSquares.length < 3) {
-            // get random square
             const randomNumber = Math.floor(Math.random() * allSquares.length);
             const square = allSquares[randomNumber];
             if (selectedSquares.includes(square)) continue;
@@ -104,15 +108,68 @@ const survey = {
         }
     },
 
-    buildTable: function () {
-        const tbody = document.getElementById('#results-table tbody');
-        for (let i = 0; i < 25; i++) {
-            const tr = document.createElement('tr');
-            const td = document.createElement('td');
-            td.textContent = this.name + ' was picked ' + this.timesPicked + ' many times.';
-            tr.appendChild(td);
-            tbody.appendChild(tr);
+    buildPickedChart: function () {
+        const chartCanvas = document.getElementById('chart1');
+        const chartCtx = chartCanvas.getContext('2d');
+
+        const names = [];
+        const timesClicked = [];
+        for(let i = 0; i < this.surveyItems.length; i ++) {
+            names.push(this.surveyItems[i].name);
+            timesClicked.push(this.surveyItems[i].timesPicked);
         }
+
+        const chart = new Chart(chartCtx, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [{
+                    label: 'number of times picked',
+                    data: timesClicked
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    },
+
+    buildShownChart: function () {
+        const chartCanvas = document.getElementById('chart2');
+        const chartCtx = chartCanvas.getContext('2d');
+
+        const names = [];
+        const shown = [];
+        for(let i = 0; i < this.surveyItems.length; i ++) {
+            names.push(this.surveyItems[i].name);
+            shown.push(this.surveyItems[i].timesShown);
+        }
+
+        const chart = new Chart(chartCtx, {
+            type: 'bar',
+            data: {
+                labels: names,
+                datasets: [{
+                    label: 'number of times shown',
+                    data: shown
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
     }
 };
 
