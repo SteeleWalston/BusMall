@@ -18,7 +18,7 @@ const listen = function () {
     if (clickCounter === 25) {
         board.removeEventListener('click', listen);
         survey.clearBoard();
-        // survey.buildTable();
+        survey.buildTable();
     }
 };
 
@@ -102,6 +102,17 @@ const survey = {
         for (let i = 0; i < squares.length; i ++) {
             squares[i].textContent = '';
         }
+    },
+
+    buildTable: function () {
+        const tbody = document.getElementById('#results-table tbody');
+        for (let i = 0; i < 25; i++) {
+            const tr = document.createElement('tr');
+            const td = document.createElement('td');
+            td.textContent = this.name + ' was picked ' + this.timesPicked + ' many times.';
+            tr.appendChild(td);
+            tbody.appendChild(tr);
+        }
     }
 };
 
@@ -111,18 +122,6 @@ SurveyItem.prototype.render = function () {
     ele.setAttribute('alt', this.name);
     return ele;
 };
-
-// SurveyItem.prototype.buildTable = function () {
-//     const tbody = document.getElementById('results-table tbody');
-//     const tr = document.createElement('tr');
-//     for (let i = 0; i < 25; i++) {
-//         const td = document.createElement('td');
-//         td.textContent = this.name + ' was picked ' + this.timesPicked + ' many times.';
-
-//         tr.appendChild(td);
-//         tbody.appendChild(tr);
-//     }
-// };
 
 survey.start();
 survey.getRandomItem();
