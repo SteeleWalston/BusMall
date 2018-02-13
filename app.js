@@ -30,6 +30,25 @@ const survey = {
             new SurveyItem ('water-can',  'Images/water-can.jpg'),
             new SurveyItem ('wine-glass',  'Images/wine-glass.jpg')
         );
+
+        survey.showItems();
+
+        const board = document.getElementById('survey-board');
+        board.addEventListener('click', function() {
+            console.log('game was clicked', event.target);
+            const file = event.target.src;
+            for (let i = 0; i < survey.surveyItems.length; i++) {
+                const item = survey.surveyItems[i];
+                const endOfFile = file.slice( file.indexOf(item.image), file.length );
+
+                if (endOfFile === item.image) {
+                    item.timesPicked++;
+                    console.table(item);
+                }
+            }
+            survey.clearBoard();
+            survey.showItems();
+        });
     },
 
     getRandomItem: function () {
@@ -65,6 +84,13 @@ const survey = {
         for (let i = 0; i < squares.length; i++) {
             squares[i].appendChild(items[i].render());
         }
+    },
+
+    clearBoard: function () {
+        const squares = document.querySelectorAll('div.row-one');
+        for (let i = 0; i < squares.length; i ++) {
+            squares[i].textContent = '';
+        }
     }
 };
 
@@ -77,4 +103,3 @@ SurveyItem.prototype.render = function () {
 
 survey.start();
 survey.getRandomItem();
-survey.showItems();
