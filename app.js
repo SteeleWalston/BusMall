@@ -53,9 +53,10 @@ const survey = {
 
     getRandomItem: function () {
         const selectedItems = [];
-        for (let i = 0; i < 3;  i++) {
+        while (selectedItems.length < 3) {
             const randomNumber = Math.floor(Math.random() * this.surveyItems.length);
             const item = this.surveyItems[randomNumber];
+            if (selectedItems.includes(item)) continue;
             selectedItems.push(item);
 
         }
