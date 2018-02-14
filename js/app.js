@@ -19,7 +19,7 @@ const listen = function () {
     survey.clearBoard();
     survey.showItems();
 
-    if (clickCounter === 5) {
+    if (clickCounter === 25) {
         board.removeEventListener('click', listen);
         // survey.clearBoard();
         survey.buildChart();
