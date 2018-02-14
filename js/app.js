@@ -22,8 +22,7 @@ const listen = function () {
     if (clickCounter === 5) {
         board.removeEventListener('click', listen);
         // survey.clearBoard();
-        survey.buildPickedChart();
-        survey.buildShownChart();
+        survey.buildChart();
 
     }
     localStorage.setItem('timesVoted', JSON.stringify(survey.surveyItems));
@@ -125,15 +124,17 @@ const survey = {
         }
     },
 
-    buildPickedChart: function () {
+    buildChart: function () {
         const chartCanvas = document.getElementById('chart1');
         const chartCtx = chartCanvas.getContext('2d');
 
         const names = [];
         const timesClicked = [];
+        const timesViewed = [];
         for(let i = 0; i < this.surveyItems.length; i ++) {
             names.push(this.surveyItems[i].name);
             timesClicked.push(this.surveyItems[i].timesPicked);
+            timesViewed.push(this.surveyItems[i].timesShown);
         }
 
         const chart = new Chart(chartCtx, {
@@ -141,8 +142,15 @@ const survey = {
             data: {
                 labels: names,
                 datasets: [{
-                    label: 'number of times picked',
-                    data: timesClicked
+                    label: 'Number of times Shown',
+                    data: timesViewed,
+                    backgroundColor: 'rgba(0,0,0, 0.7)'
+                },
+
+                {
+                    label: 'Number of times Picked',
+                    data: timesClicked,
+                    backgroundColor: 'white'
                 }]
             },
             options: {
@@ -156,38 +164,6 @@ const survey = {
             }
         });
     },
-
-    buildShownChart: function () {
-        const chartCanvas = document.getElementById('chart2');
-        const chartCtx = chartCanvas.getContext('2d');
-
-        const names = [];
-        const shown = [];
-        for(let i = 0; i < this.surveyItems.length; i ++) {
-            names.push(this.surveyItems[i].name);
-            shown.push(this.surveyItems[i].timesShown);
-        }
-
-        const chart = new Chart(chartCtx, {
-            type: 'bar',
-            data: {
-                labels: names,
-                datasets: [{
-                    label: 'number of times shown',
-                    data: shown
-                }]
-            },
-            options: {
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero:true
-                        }
-                    }]
-                }
-            }
-        });
-    }
 };
 
 SurveyItem.prototype.render = function () {
