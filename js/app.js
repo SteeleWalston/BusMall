@@ -24,42 +24,59 @@ const listen = function () {
         // survey.clearBoard();
         survey.buildPickedChart();
         survey.buildShownChart();
+
     }
+    localStorage.setItem('timesVoted', JSON.stringify(survey.surveyItems));
+    // localStorage.setItem('timesShown', JSON.stringify(survey.surveyItems));
 };
 
-function SurveyItem (name, imageFile) {
+function SurveyItem (name, imageFile, timesPicked, timesShown) {
     this.name = name;
     this.image = imageFile;
-    this.timesPicked = 0;
-    this.timesShown = 0;
+    this.timesPicked = timesPicked;
+    this.timesShown = timesShown;
 }
 
 const survey = {
     surveyItems: [],
     start: function () {
 
-        this.surveyItems.push(
-            new SurveyItem ('bag',  'Images/bag.jpg'),
-            new SurveyItem ('banana',  'Images/banana.jpg'),
-            new SurveyItem ('bathroom',  'Images/bathroom.jpg'),
-            new SurveyItem ('boots',  'Images/boots.jpg'),
-            new SurveyItem ('breakfast',  'Images/breakfast.jpg'),
-            new SurveyItem ('bubblegum',  'Images/bubblegum.jpg'),
-            new SurveyItem ('chair',  'Images/chair.jpg'),
-            new SurveyItem ('cthulhu',  'Images/cthulhu.jpg'),
-            new SurveyItem ('dog-duck',  'Images/dog-duck.jpg'),
-            new SurveyItem ('dragon',  'Images/dragon.jpg'),
-            new SurveyItem ('pen',  'Images/pen.jpg'),
-            new SurveyItem ('pet-sweep',  'Images/pet-sweep.jpg'),
-            new SurveyItem ('scissors',  'Images/scissors.jpg'),
-            new SurveyItem ('shark',  'Images/shark.jpg'),
-            new SurveyItem ('sweep',  'Images/sweep.png'),
-            new SurveyItem ('tauntaun',  'Images/tauntaun.jpg'),
-            new SurveyItem ('unicorn',  'Images/unicorn.jpg'),
-            new SurveyItem ('usb',  'Images/usb.gif'),
-            new SurveyItem ('water-can',  'Images/water-can.jpg'),
-            new SurveyItem ('wine-glass',  'Images/wine-glass.jpg')
-        );
+        if (localStorage.getItem('timesVoted')) {
+            const surveyObjects = JSON.parse(localStorage.getItem('timesVoted'));
+
+            for (let i = 0; i < surveyObjects.length; i++) {
+                const surveyObj = surveyObjects[i];
+
+                const vote = new SurveyItem(surveyObj.name, surveyObj.image, surveyObj.timesPicked, surveyObj.timesShown);
+                this.surveyItems.push(vote);
+            }
+
+        } else {
+
+            this.surveyItems.push(
+                new SurveyItem ('bag',  'Images/bag.jpg', 0, 0),
+                new SurveyItem ('banana',  'Images/banana.jpg', 0, 0),
+                new SurveyItem ('bathroom',  'Images/bathroom.jpg', 0, 0),
+                new SurveyItem ('boots',  'Images/boots.jpg', 0, 0),
+                new SurveyItem ('breakfast',  'Images/breakfast.jpg', 0, 0),
+                new SurveyItem ('bubblegum',  'Images/bubblegum.jpg', 0, 0),
+                new SurveyItem ('chair',  'Images/chair.jpg', 0, 0),
+                new SurveyItem ('cthulhu',  'Images/cthulhu.jpg', 0, 0),
+                new SurveyItem ('dog-duck',  'Images/dog-duck.jpg', 0, 0),
+                new SurveyItem ('dragon',  'Images/dragon.jpg', 0, 0),
+                new SurveyItem ('pen',  'Images/pen.jpg', 0, 0),
+                new SurveyItem ('pet-sweep',  'Images/pet-sweep.jpg', 0, 0),
+                new SurveyItem ('scissors',  'Images/scissors.jpg', 0, 0),
+                new SurveyItem ('shark',  'Images/shark.jpg', 0, 0),
+                new SurveyItem ('sweep',  'Images/sweep.png', 0, 0),
+                new SurveyItem ('tauntaun',  'Images/tauntaun.jpg', 0, 0),
+                new SurveyItem ('unicorn',  'Images/unicorn.jpg', 0, 0),
+                new SurveyItem ('usb',  'Images/usb.gif', 0, 0),
+                new SurveyItem ('water-can',  'Images/water-can.jpg', 0, 0),
+                new SurveyItem ('wine-glass',  'Images/wine-glass.jpg', 0, 0)
+            );
+        }
+
 
         survey.showItems();
         board.addEventListener('click', listen);
