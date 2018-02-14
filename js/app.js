@@ -1,4 +1,4 @@
-// 'use strict';
+'use strict';
 
 let clickCounter = 0;
 
@@ -19,7 +19,7 @@ const listen = function () {
     survey.clearBoard();
     survey.showItems();
 
-    if (clickCounter === 27) {
+    if (clickCounter === 5) {
         board.removeEventListener('click', listen);
         // survey.clearBoard();
         survey.buildPickedChart();

@@ -30,8 +30,8 @@ h1 {
 }
 
 #chart-section {
-    text-align: center;
-    width: 400px;
+    height: 200px;
+    width: 500px
 }
 
 #chart2 {
