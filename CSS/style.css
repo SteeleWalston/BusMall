@@ -1,5 +1,7 @@
 body {
-    background: rgb(172, 245, 235);
+    background: rgb(201, 255, 248);
+    /* background-image: url("../Images/trimet.jpg");
+    background-color: transparent */
 }
 
 
@@ -16,7 +18,7 @@ section div {
 
 h1 {
     margin-top: 50px;
-    font-family: 'Orbitron', sans-serif;
+    font-family: 'Montserrat Subrayada', sans-serif;
     text-align: center;
     color: rgb(125, 177, 170);
     font-size: 75px 
