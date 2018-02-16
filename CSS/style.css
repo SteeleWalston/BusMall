@@ -1,7 +1,7 @@
 body {
-    background: rgb(201, 255, 248);
-    /* background-image: url("../Images/trimet.jpg");
-    background-color: transparent */
+    background: rgb(253, 253, 253);
+    background-image: url("../Images/trimet.jpg");
+    background-size: 2000px
 }
 
 
@@ -11,17 +11,28 @@ section div {
 
 #survey-board {
     margin: auto;
-    background-color: rgb(125, 177, 170);
+    background-color: rgb(139, 139, 139);
     text-align: center;
-    border-color: palevioletred solid 5px
 }
 
 h1 {
     margin-top: 50px;
     font-family: 'Montserrat Subrayada', sans-serif;
     text-align: center;
-    color: rgb(125, 177, 170);
+    color: rgb(63, 63, 63);
     font-size: 75px 
+}
+
+nav {
+    display: flex;
+    justify-content: center
+}
+
+h2 {
+    text-align: center;
+    color: rgb(255, 255, 255);
+    background-color: rgb(80, 80, 80);
+    width: 400px
 }
 
 .row-one img{
@@ -38,5 +49,12 @@ h1 {
 
 #chart2 {
     float: right
+}
+
+#settings-form {
+   text-align: center;
+   margin-top: 200px;
+   background-color: rgb(139, 139, 139);
+   color: white
 }
 
