@@ -19,7 +19,7 @@ const listen = function () {
     survey.clearBoard();
     survey.showItems();
 
-    if (clickCounter === 25) {
+    if (clickCounter === survey.numClicks) {
         board.removeEventListener('click', listen);
         // survey.clearBoard();
         survey.buildChart();
@@ -38,7 +38,11 @@ function SurveyItem (name, imageFile, timesPicked, timesShown) {
 
 const survey = {
     surveyItems: [],
+    numProducts: 3,
+    numClicks: 25,
     start: function () {
+
+        this.getSettings();
 
         if (localStorage.getItem('timesVoted')) {
             const surveyObjects = JSON.parse(localStorage.getItem('timesVoted'));
@@ -81,9 +85,18 @@ const survey = {
         board.addEventListener('click', listen);
     },
 
+    getSettings: function () {
+        if (localStorage.getItem('settings')) {
+            const savedSettings = JSON.parse(localStorage.getItem('settings'));
+
+            this.numProducts = savedSettings.numProducts;
+            this.numClicks = savedSettings.numClicks;
+        }
+    },
+
     getRandomItem: function () {
         const selectedItems = [];
-        while (selectedItems.length < 3) {
+        while (selectedItems.length < this.numProducts) {
             const randomNumber = Math.floor(Math.random() * this.surveyItems.length);
             const item = this.surveyItems[randomNumber];
             if (selectedItems.includes(item)) continue;
@@ -99,7 +112,7 @@ const survey = {
         const section = document.getElementById('survey-board');
         const allSquares = document.querySelectorAll('div.row-one');
         const selectedSquares = [];
-        while(selectedSquares.length < 3) {
+        while(selectedSquares.length < this.numProducts) {
             const randomNumber = Math.floor(Math.random() * allSquares.length);
             const square = allSquares[randomNumber];
             if (selectedSquares.includes(square)) continue;
