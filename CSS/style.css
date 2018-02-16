@@ -1,7 +1,7 @@
 body {
     background: rgb(253, 253, 253);
     background-image: url("../Images/trimet.jpg");
-    background-size: 2000px
+    background-size: 2000px;
 }
 
 
@@ -32,7 +32,8 @@ h2 {
     text-align: center;
     color: rgb(255, 255, 255);
     background-color: rgb(80, 80, 80);
-    width: 400px
+    width: 400px;
+    cursor: pointer
 }
 
 .row-one img{
@@ -43,12 +44,18 @@ h2 {
 }
 
 #chart-section {
-    height: 200px;
-    width: 650px
+    height: 50%;
+    width: 100%
 }
 
-#chart2 {
-    float: right
+#chart-section1 {
+    /* background-color: white; */
+    display: flex;
+    justify-content: center
+}
+
+#chart1 {
+    background-color: white;
 }
 
 #settings-form {
@@ -56,5 +63,9 @@ h2 {
    margin-top: 200px;
    background-color: rgb(139, 139, 139);
    color: white
+}
+
+#settings-form input {
+    color: black
 }
 

@@ -163,7 +163,7 @@ const survey = {
                 {
                     label: 'Number of times Picked',
                     data: timesClicked,
-                    backgroundColor: 'white'
+                    backgroundColor: 'blue'
                 }]
             },
             options: {
