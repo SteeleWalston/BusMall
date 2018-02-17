@@ -23,6 +23,7 @@ const listen = function () {
         board.removeEventListener('click', listen);
         // survey.clearBoard();
         survey.buildChart();
+        clickCounter = 0;
 
     }
     localStorage.setItem('timesVoted', JSON.stringify(survey.surveyItems));
@@ -39,14 +40,13 @@ function SurveyItem (name, imageFile, timesPicked, timesShown) {
 const survey = {
     surveyItems: [],
     numProducts: 3,
-    numClicks: 25,
+    numClicks: 20,
     start: function () {
 
         this.getSettings();
 
         if (localStorage.getItem('timesVoted')) {
             const surveyObjects = JSON.parse(localStorage.getItem('timesVoted'));
-
             for (let i = 0; i < surveyObjects.length; i++) {
                 const surveyObj = surveyObjects[i];
 
@@ -188,3 +188,12 @@ SurveyItem.prototype.render = function () {
 
 survey.start();
 survey.getRandomItem();
+
+const startSurvey = document.getElementById('start-button');
+startSurvey.addEventListener('click', function() {
+    // clickCounter = 0;
+    survey.surveyItems = [];
+    survey.clearBoard();
+    survey.getSettings();
+    survey.start();
+});
