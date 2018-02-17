@@ -81,7 +81,7 @@ const survey = {
         }
 
 
-        survey.showItems();
+        // survey.showItems();
         board.addEventListener('click', listen);
     },
 
@@ -196,4 +196,5 @@ startSurvey.addEventListener('click', function() {
     survey.clearBoard();
     survey.getSettings();
     survey.start();
+    survey.showItems();
 });
