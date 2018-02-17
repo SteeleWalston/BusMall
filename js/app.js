@@ -21,13 +21,11 @@ const listen = function () {
 
     if (clickCounter === survey.numClicks) {
         board.removeEventListener('click', listen);
-        // survey.clearBoard();
         survey.buildChart();
         clickCounter = 0;
 
     }
     localStorage.setItem('timesVoted', JSON.stringify(survey.surveyItems));
-    // localStorage.setItem('timesShown', JSON.stringify(survey.surveyItems));
 };
 
 function SurveyItem (name, imageFile, timesPicked, timesShown) {
@@ -80,8 +78,6 @@ const survey = {
             );
         }
 
-
-        // survey.showItems();
         board.addEventListener('click', listen);
     },
 
@@ -191,7 +187,6 @@ survey.getRandomItem();
 
 const startSurvey = document.getElementById('start-button');
 startSurvey.addEventListener('click', function() {
-    // clickCounter = 0;
     survey.surveyItems = [];
     survey.clearBoard();
     survey.getSettings();
