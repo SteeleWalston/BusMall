@@ -28,7 +28,13 @@ nav {
     justify-content: center
 }
 
-h2 {
+#instruct {
+    text-align: center;
+    color: rgb(36, 36, 36);
+    font-size: 30px
+}
+
+#start-button {
     border-radius: 10px;
     text-align: center;
     color: rgb(255, 255, 255);
