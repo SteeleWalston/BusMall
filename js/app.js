@@ -21,12 +21,11 @@ const listen = function () {
 
     if (clickCounter === survey.numClicks) {
         board.removeEventListener('click', listen);
-        // survey.clearBoard();
         survey.buildChart();
+        clickCounter = 0;
 
     }
     localStorage.setItem('timesVoted', JSON.stringify(survey.surveyItems));
-    // localStorage.setItem('timesShown', JSON.stringify(survey.surveyItems));
 };
 
 function SurveyItem (name, imageFile, timesPicked, timesShown) {
@@ -39,14 +38,13 @@ function SurveyItem (name, imageFile, timesPicked, timesShown) {
 const survey = {
     surveyItems: [],
     numProducts: 3,
-    numClicks: 25,
+    numClicks: 20,
     start: function () {
 
         this.getSettings();
 
         if (localStorage.getItem('timesVoted')) {
             const surveyObjects = JSON.parse(localStorage.getItem('timesVoted'));
-
             for (let i = 0; i < surveyObjects.length; i++) {
                 const surveyObj = surveyObjects[i];
 
@@ -80,8 +78,6 @@ const survey = {
             );
         }
 
-
-        survey.showItems();
         board.addEventListener('click', listen);
     },
 
@@ -163,7 +159,7 @@ const survey = {
                 {
                     label: 'Number of times Picked',
                     data: timesClicked,
-                    backgroundColor: 'white'
+                    backgroundColor: 'blue'
                 }]
             },
             options: {
@@ -188,3 +184,12 @@ SurveyItem.prototype.render = function () {
 
 survey.start();
 survey.getRandomItem();
+
+const startSurvey = document.getElementById('start-button');
+startSurvey.addEventListener('click', function() {
+    survey.surveyItems = [];
+    survey.clearBoard();
+    survey.getSettings();
+    survey.start();
+    survey.showItems();
+});
